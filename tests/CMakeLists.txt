@@ -18,6 +18,7 @@ add_executable(mcse-tests
 
 target_link_libraries(mcse-tests
     mcse-engine
+    mcse-protocol
     gtest
     gtest_main
 )

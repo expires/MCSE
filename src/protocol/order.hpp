@@ -21,11 +21,17 @@ namespace mcse::protocol
     {
         uint64_t id;
         uint64_t timestamp;
-        double price;
+        uint64_t price;
         uint64_t quantity;
         uint64_t filled;
         Side side;
         OrderType type;
+    };
+
+    struct OrderLocation
+    {
+        Side side;
+        uint64_t price;
     };
 
 }

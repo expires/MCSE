@@ -20,10 +20,11 @@ jobs:
 
     - name: Configure CMake
       run: |
-        cmake -B build -DCMAKE_BUILD_TYPE=Release
+        cmake -B build -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_CXX_FLAGS="-O2 -Wall -Wextra -Werror"
 
     - name: Build
-      run: cmake --build build
+      run: cmake --build build --verbose
 
     - name: Run tests
       run: cd build && ctest --output-on-failure
