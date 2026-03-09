@@ -1,11 +1,11 @@
-file(GLOB MCSE_SOURCES "*.cpp")
-file(GLOB MCSE_HEADERS "*.hpp")
-
 add_library(mcse-engine
-        ${MCSE_SOURCES}
-        ${MCSE_HEADERS}
+    order_book.cpp
+    order_book.hpp
+    price_level.hpp
 )
 
 target_include_directories(mcse-engine PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/..
 )
+
+target_link_libraries(mcse-engine PUBLIC mcse-protocol)

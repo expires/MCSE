@@ -10,10 +10,8 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-file(GLOB TEST_SOURCES "*.cpp")
-
 add_executable(mcse-tests
-    ${TEST_SOURCES}
+    order_book_test.cpp
 )
 
 target_link_libraries(mcse-tests

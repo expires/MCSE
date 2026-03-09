@@ -8,10 +8,8 @@ FetchContent_Declare(
 set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googlebenchmark)
 
-file(GLOB BENCH_SOURCES "*.cpp")
-
 add_executable(mcse-bench
-    ${BENCH_SOURCES}
+    order_book_bench.cpp
 )
 
 target_link_libraries(mcse-bench
