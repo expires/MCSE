@@ -10,6 +10,8 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
+enable_testing()
+
 add_subdirectory(src)
 add_subdirectory(tests)
 add_subdirectory(bench)
