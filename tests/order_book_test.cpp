@@ -77,3 +77,13 @@ TEST_F(OrderBookFixture, spread_returns_correct_difference)
     EXPECT_EQ(book.spread(), 100U);
 }
 
+TEST_F(OrderBookFixture, fully_fill_resting_ask)
+{
+    book.insert_order(make_order(0U, ORDER_PRICE, ORDER_QUANTITY, Side::Sell));
+    EXPECT_EQ(book.best_ask(), ORDER_PRICE);
+
+    book.match_order(make_order(0U, ORDER_PRICE, ORDER_QUANTITY, Side::Buy));
+
+    EXPECT_EQ(book.best_bid(), 0U);
+    EXPECT_EQ(book.best_ask(), 0U);
+}
