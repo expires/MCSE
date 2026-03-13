@@ -111,8 +111,10 @@ namespace mcse::engine
                 if (level.orders.front().quantity == 0)
                     level.orders.pop_front();
             }
+
+            const uint64_t level_price = book.begin()->first;
             if (level.orders.empty())
-                book.erase(level.price);
+                book.erase(level_price);
         }
     }
 
