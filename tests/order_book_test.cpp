@@ -169,13 +169,13 @@ TEST_F(OrderBookFixture, limit_buy_no_match_parks_in_bids)
 
 TEST_F(OrderBookFixture, limit_buy_partial_match_remainder_parks_in_bids)
 {
-    book.insert_order(make_order(0U, ORDER_PRICE, ORDER_QUANTITY + 1U, Side::Sell));
+    book.insert_order(make_order(0U, ORDER_PRICE, ORDER_QUANTITY, Side::Sell));
     EXPECT_EQ(book.best_ask(), ORDER_PRICE);
 
-    book.match_order(make_order(1U, ORDER_PRICE, ORDER_QUANTITY, Side::Buy, OrderType::Limit));
+    book.match_order(make_order(1U, ORDER_PRICE, ORDER_QUANTITY + 1U, Side::Buy, OrderType::Limit));
 
     EXPECT_EQ(book.best_bid(), ORDER_PRICE);
-    EXPECT_EQ(book.best_ask(), ORDER_PRICE);
+    EXPECT_EQ(book.best_ask(), 0U);
 }
 
 TEST_F(OrderBookFixture, limit_sell_matches_at_exact_price)
