@@ -209,4 +209,14 @@ TEST_F(OrderBookFixture, price_time_priority_earlier_order_fills_first)
     book.match_order(make_market_order(2U, 1U, Side::Buy));
 
     EXPECT_EQ(book.best_ask(), ORDER_PRICE);
+    EXPECT_EQ(book.total_quantity_at(ORDER_PRICE, Side::Sell), 2U);
+}
+
+TEST_F(OrderBookFixture, spread_returns_zero_after_all_cancels)
+{
+    book.insert_order(make_order(0U, ORDER_PRICE, ORDER_QUANTITY, Side::Buy));
+    book.insert_order(make_order(1U, ORDER_PRICE + 100U, ORDER_QUANTITY, Side::Sell));
+    book.cancel_order(0U);
+    book.cancel_order(1U);
+    EXPECT_EQ(book.spread(), 0U);
 }
