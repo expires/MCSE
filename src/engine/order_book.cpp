@@ -1,6 +1,8 @@
 #include "order_book.hpp"
 
-namespace mcse::engine
+#include <cassert>
+
+namespace mcse::transport
 {
     OrderBook::OrderBook()
     {
