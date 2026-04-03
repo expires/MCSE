@@ -3,7 +3,6 @@
 #include <map>
 #include <unordered_map>
 #include "price_level.hpp"
-#include <cassert>
 
 namespace mcse::engine
 {
