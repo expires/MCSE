@@ -4,9 +4,7 @@
 
 namespace mcse::transport
 {
-    OrderBook::OrderBook()
-    {
-    }
+    OrderBook::OrderBook() = default;
 
     void OrderBook::insert_order(const protocol::Order& order)
     {
