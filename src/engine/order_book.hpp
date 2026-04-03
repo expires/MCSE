@@ -23,6 +23,7 @@ namespace mcse::engine
         [[nodiscard]] uint64_t best_bid() const;
         [[nodiscard]] uint64_t best_ask() const;
         [[nodiscard]] uint64_t spread() const;
+        [[nodiscard]] uint64_t total_quantity_at(uint64_t price, protocol::Side side) const;
 
     private:
         template<typename Comparator>

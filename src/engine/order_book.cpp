@@ -137,4 +137,19 @@ namespace mcse::engine
         return best_ask() - best_bid();
     }
 
+    uint64_t OrderBook::total_quantity_at(const uint64_t price, const protocol::Side side) const
+    {
+        if (side == protocol::Side::Buy)
+        {
+            const auto it = bids.find(price);
+            if (it == bids.end()) return 0;
+            return it->second.total_quantity;
+        }
+
+        // protocol::Side::Sell
+        const auto it = asks.find(price);
+        if (it == bids.end()) return 0;
+        return it->second.total_quantity;
+    }
+
 }
