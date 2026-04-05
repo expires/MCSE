@@ -17,7 +17,7 @@ namespace mcse::transport
     public:
         RingBuffer() = default;
 
-        void push(T& order)
+        void push(const T& order)
         {
             const uint64_t h = head.load(std::memory_order_relaxed);
             if (const uint64_t t = tail.load(std::memory_order_acquire); h - t == Capacity) return;

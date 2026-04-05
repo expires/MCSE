@@ -148,7 +148,7 @@ namespace mcse::engine
 
         // protocol::Side::Sell
         const auto it = asks.find(price);
-        if (it == bids.end()) return 0;
+        if (it == asks.end()) return 0;
         return it->second.total_quantity;
     }
 

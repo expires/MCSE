@@ -9,7 +9,7 @@ namespace mcse::engine
     struct PriceLevel
     {
         std::deque<protocol::Order> orders;
-        uint64_t total_quantity;
+        uint64_t total_quantity = 0;
     };
 
 }
