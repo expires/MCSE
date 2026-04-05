@@ -1,7 +1,8 @@
 #include "order_book_test.hpp"
 
+using namespace mcse::test;
 using namespace mcse::test::order_book;
-using namespace  mcse::protocol;
+using namespace mcse::protocol;
 
 TEST_F(OrderBookFixture, insert_buy_updates_best_bid)
 {
