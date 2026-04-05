@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include <optional>
 #include <unordered_map>
 #include "price_level.hpp"
 
@@ -26,6 +27,6 @@ namespace mcse::engine
 
     private:
         template<typename Comparator>
-        void fill_order(std::map<uint64_t, PriceLevel, Comparator>& book, uint64_t& quantity_remaining, uint64_t limit_price = 0, protocol::Side side = protocol::Side::Buy);
+        void fill_order(std::map<uint64_t, PriceLevel, Comparator>& book, uint64_t& quantity_remaining, std::optional<uint64_t> limit_price = std::nullopt, protocol::Side side = protocol::Side::Buy);
     };
 }

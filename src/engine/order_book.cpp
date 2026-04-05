@@ -91,12 +91,12 @@ namespace mcse::engine
     }
 
     template<typename Comparator>
-    void OrderBook::fill_order(std::map<uint64_t, PriceLevel, Comparator>& book, uint64_t& quantity_remaining, uint64_t limit_price, protocol::Side side)
+    void OrderBook::fill_order(std::map<uint64_t, PriceLevel, Comparator>& book, uint64_t& quantity_remaining, std::optional<uint64_t> limit_price, protocol::Side side)
     {
         while (quantity_remaining > 0 && !book.empty())
         {
-            if (limit_price != 0 && side == protocol::Side::Buy  && book.begin()->first > limit_price) break;
-            if (limit_price != 0 && side == protocol::Side::Sell && book.begin()->first < limit_price) break;
+            if (limit_price && side == protocol::Side::Buy  && book.begin()->first > *limit_price) break;
+            if (limit_price && side == protocol::Side::Sell && book.begin()->first < *limit_price) break;
 
             auto& level = book.begin()->second;
 
@@ -109,7 +109,10 @@ namespace mcse::engine
                 level.total_quantity -= fill;
 
                 if (level.orders.front().quantity == 0)
+                {
+                    orders.erase(level.orders.front().id);
                     level.orders.pop_front();
+                }
             }
 
             const uint64_t level_price = book.begin()->first;
