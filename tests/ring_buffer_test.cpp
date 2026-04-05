@@ -83,3 +83,52 @@ TEST_F(RingBufferFixture, push_to_capacity_all_items_recoverable)
 
     EXPECT_EQ(count, TEST_CAPACITY);
 }
+
+TEST_F(RingBufferFixture, wrap_around_preserves_correctness)
+{
+    fill_buffer();
+    for (uint64_t i = 0U; i < TEST_CAPACITY; i++)
+        buffer.pop();
+
+    EXPECT_TRUE(buffer.empty());
+
+    fill_buffer();
+    EXPECT_TRUE(buffer.full());
+
+    for (uint64_t i = 0U; i < TEST_CAPACITY; i++)
+        EXPECT_EQ(i, buffer.pop()->id);
+}
+
+TEST_F(RingBufferFixture, spsc_producer_consumer_all_items_received)
+{
+    std::vector<uint64_t> received;
+    received.reserve(CONCURRENT_TEST_SIZE);
+
+    // Consumer
+    std::thread consumer([&]
+    {
+        uint64_t count = 0;
+        while (count < CONCURRENT_TEST_SIZE)
+        {
+            if (auto item = buffer.pop())
+            {
+                received.push_back(item->id);
+                count++;
+            }
+        }
+    });
+
+    // Producer
+    for (uint64_t i = 0; i < CONCURRENT_TEST_SIZE; i++)
+    {
+        Order order = make_order(i, ORDER_PRICE, ORDER_QUANTITY, Side::Sell, OrderType::Market, ORDER_TIMESTAMP);
+        while (buffer.full()) {} // spin if full
+        buffer.push(order);
+    }
+
+    consumer.join();
+
+    ASSERT_EQ(received.size(), CONCURRENT_TEST_SIZE);
+    for (uint64_t i = 0; i < CONCURRENT_TEST_SIZE; i++)
+        EXPECT_EQ(received[i], i);
+}

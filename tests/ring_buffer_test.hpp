@@ -4,10 +4,12 @@
 #include "ring_buffer.hpp"
 #include "test_helpers.hpp"
 #include "order.hpp"
+#include <thread>
 
 namespace mcse::test::ring_buffer
 {
     constexpr size_t TEST_CAPACITY = 8U;
+    static constexpr size_t CONCURRENT_TEST_SIZE = 1'000'000;
 
     class RingBufferFixture : public ::testing::Test
     {
