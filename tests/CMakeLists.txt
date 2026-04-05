@@ -10,17 +10,20 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(mcse-tests
     order_book_test.cpp
+    ring_buffer_test.cpp
 )
 
 target_include_directories(mcse-tests PRIVATE
         ${CMAKE_SOURCE_DIR}/src
         ${CMAKE_SOURCE_DIR}/src/engine
         ${CMAKE_SOURCE_DIR}/src/protocol
+        ${CMAKE_SOURCE_DIR}/src/transport
 )
 
 target_link_libraries(mcse-tests
     mcse-engine
     mcse-protocol
+    mcse-transport
     gtest
     gtest_main
 )

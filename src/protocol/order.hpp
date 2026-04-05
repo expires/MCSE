@@ -19,6 +19,7 @@ namespace mcse::protocol
 
     struct Order
     {
+        bool operator == (const Order &) const = default;
         uint64_t id;
         uint64_t timestamp;
         uint64_t price;
