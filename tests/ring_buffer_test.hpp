@@ -16,6 +16,15 @@ namespace mcse::test::ring_buffer
 
         void SetUp() override {}
         void TearDown() override {}
+
+        void fill_buffer()
+        {
+            for (uint64_t i = 0U; i < TEST_CAPACITY; i++)
+            {
+                protocol::Order order = make_order(i, ORDER_PRICE, ORDER_QUANTITY, protocol::Side::Sell, protocol::OrderType::Market, ORDER_TIMESTAMP);
+                buffer.push(order);
+            }
+        }
     };
 
 } // namespace mcse::test::ring_buffer
