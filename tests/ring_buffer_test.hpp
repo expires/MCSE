@@ -16,9 +16,6 @@ namespace mcse::test::ring_buffer
     protected:
         transport::RingBuffer<protocol::Order, TEST_CAPACITY> buffer;
 
-        void SetUp() override {}
-        void TearDown() override {}
-
         void fill_buffer()
         {
             for (uint64_t i = 0U; i < TEST_CAPACITY; i++)

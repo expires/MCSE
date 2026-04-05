@@ -10,9 +10,6 @@ namespace mcse::test::order_book
     {
     protected:
         engine::OrderBook book;
-
-        void SetUp() override {}
-        void TearDown() override {}
     };
 
 } // namespace mcse::test::order_book
